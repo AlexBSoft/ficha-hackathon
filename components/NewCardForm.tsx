@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -88,11 +89,11 @@ export function NewCardForm() {
     const router = useRouter()
 
     const form = useForm<z.infer<typeof formSchema>>({
-        //resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema),
         defaultValues: {
             fio: "",
             bank: "",
-            currnecy: "rub"
+            currency: "rub"
         },
     })
 
@@ -104,7 +105,7 @@ export function NewCardForm() {
 
         const { data: ddata, error: derror } = await supabase
         .from('cards')
-        .insert({ cardholder: values.fio, bank: values.bank, currency: values.currnecy, expire_date: "08/30", cvv:getRandomIntInclusive(100,999),number: generateBankCardNumber() })
+        .insert({ cardholder: values.fio, bank: values.bank, currency: values.currency, expire_date: "08/30", cvv:getRandomIntInclusive(100,999),number: generateBankCardNumber() })
         .select()
 
         if(derror)

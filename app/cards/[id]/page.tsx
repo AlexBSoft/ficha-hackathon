@@ -86,11 +86,11 @@ export default async function CardPage({ params }: { params: { id: string } }) {
           </p>
           
           <Box
-            p="6"
             style={{
               borderRadius: 'var(--radius-4)',
               color: "white"
             }}
+            className='hover:shadow-xl'
           >
               <Flex
                 direction="column"
@@ -106,6 +106,7 @@ export default async function CardPage({ params }: { params: { id: string } }) {
                     '--gray-12': 'white',
                   } as React.CSSProperties
                 }
+                
               >
                 <Text weight="medium" mt="3" mx="3" size="2">
                   {card.cardholder}
