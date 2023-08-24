@@ -69,6 +69,4 @@ function card_number_to_chuks(str){
     return res_str
 }
 
-console.log(card_number_to_chuks("1234123412341234"))
-
-module.exports = {hash}
+module.exports = {hash, card_number_to_chuks}
