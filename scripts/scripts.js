@@ -56,4 +56,19 @@ function getRandomCryptoCurrency(){
     return getCryptoCurrency(arr[getRandomIntInclusive(0, 4)])
 }
 
+function card_number_to_chuks(str){
+    res_str = ''
+    
+    for(let i = 0; i < str.length; i++){
+        res_str += str[i];
+        if(i % 4 == 3){
+            res_str += ' ';
+        }
+    }
+    
+    return res_str
+}
+
+console.log(card_number_to_chuks("1234123412341234"))
+
 module.exports = {hash}
