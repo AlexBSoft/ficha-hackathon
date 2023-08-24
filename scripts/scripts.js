@@ -1,7 +1,7 @@
 const { createHash } = require('crypto');
 
 function hash() {
-    chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ123456789';
+    var chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ123456789';
     var str = '';
     for (var i = 0; i < 64; i++) {
         var pos = Math.floor(Math.random() * chrs.length);
@@ -55,3 +55,5 @@ function getRandomCryptoCurrency(){
     const arr = ["btc", "eth", "usdt", "bnb", "xrp"]
     return getCryptoCurrency(arr[getRandomIntInclusive(0, 4)])
 }
+
+module.exports = {hash}

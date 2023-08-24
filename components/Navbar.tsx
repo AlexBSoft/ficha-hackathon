@@ -23,6 +23,18 @@ export default async function Navbar() {
                         className="">
                         Карты
                     </Link>}
+
+                    {user && <Link
+                        href={`/wallets/`}
+                        className="">
+                        Кошельки
+                    </Link>}
+
+                    {user && <Link
+                        href={`/banks/`}
+                        className="">
+                        Банки
+                    </Link>}
                 </div>
                 <div className='flex-none'>
                     {user ? (

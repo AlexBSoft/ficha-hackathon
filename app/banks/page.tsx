@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic'
 import { Button } from "@/components/ui/button"
 
 
-export default async function Cards() {
+export default async function Banks() {
   const supabase = createServerComponentClient({ cookies })
 
   const {
@@ -17,9 +17,9 @@ export default async function Cards() {
   } = await supabase.auth.getUser()
 
   // Получение  из БД
-  const { data: cards, error: cerror } = await supabase
-  .from('cards')
-  .select<string, any>().eq('user_id', user?.id)
+  const { data: banks, error: cerror } = await supabase
+  .from('banks')
+  .select<string, any>()
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -28,7 +28,7 @@ export default async function Cards() {
       <div className="animate-in flex flex-col gap-14 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
         <div className="flex flex-col items-center mb-4 lg:mb-12">
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-12">
-            Банковские карты
+            Банки системы
           </p>
           
             <Link
@@ -43,22 +43,23 @@ export default async function Cards() {
 
         <div className="flex flex-col gap-8 text-foreground">
           <h2 className="text-lg font-bold text-center">
-            Мои банковские карты
+            Банки системы
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {cards?.map(({id,number,cardholder,cvv, bank, currency, balance}) => (
+            {banks?.map(({id,logo,name,country, currency, balance}) => (
               <a
                 key={id}
                 className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
-                href={`/cards/${id}`}
+                href={`/wallets/${id}`}
                 target="_blank"
                 rel="noreferrer"
               >
                 <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
-                  {number}
+                  <img src={logo} />
+                  {name}
                 </h3>
                 <div className="flex flex-col grow gap-4 justify-between">
-                  <p className="text-sm opacity-70">{cardholder}</p>
+                  <p className="text-sm opacity-70">{country}</p>
                   <div className="flex justify-between items-center">
                     {balance} {currency}
                   </div>
