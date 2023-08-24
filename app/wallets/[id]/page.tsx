@@ -32,6 +32,7 @@ export default async function Wallet({ params }: { params: { id: string } }) {
   let { data: wallet, error: cerror } = await supabase
   .from('crypto_wallets')
   .select<string, any>().eq('id', params.id)
+  .limit(1).single()
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -42,14 +43,24 @@ export default async function Wallet({ params }: { params: { id: string } }) {
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-12">
             Кошелек
           </p>
-          
+          {wallet?.address}
+
+          <p>{wallet?.balance} {wallet?.currency}</p>
+
+            <Link href="/cards/create"className="">
+                <Button variant="outline"> Перевести</Button>
+            </Link>
+
+            <Link href="/cards/create"className="">
+                <Button variant="outline"> Получить</Button>
+            </Link>
         </div>
 
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
         <div className="flex flex-col gap-8 text-foreground">
           <h2 className="text-lg font-bold text-center">
-            Мои кошельки
+            Транзакции
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {wallet?.address}

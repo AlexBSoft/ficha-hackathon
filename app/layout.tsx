@@ -1,4 +1,6 @@
 import './globals.css'
+import '@radix-ui/themes/styles.css';
+import { Theme } from '@radix-ui/themes';
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,7 +16,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <main className="min-h-screen bg-background flex flex-col items-center">
+          <Theme>
           {children}
+          </Theme>
         </main>
       </body>
     </html>

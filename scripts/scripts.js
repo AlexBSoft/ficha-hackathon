@@ -57,7 +57,7 @@ function getRandomCryptoCurrency(){
 }
 
 function card_number_to_chuks(str){
-    res_str = ''
+    let res_str = ''
     
     for(let i = 0; i < str.length; i++){
         res_str += str[i];

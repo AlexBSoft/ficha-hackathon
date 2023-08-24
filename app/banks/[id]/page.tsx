@@ -29,9 +29,20 @@ export default async function Bank({ params }: { params: { id: string } }) {
   } = await supabase.auth.getUser()
 
   // Получение  из БД
-  let { data: bank, error: cerror } = await supabase
+  let { data: bank, error: berror } = await supabase
   .from('banks')
   .select<string, any>().eq('id', params.id)
+  .limit(1).single()
+
+  console.log("dd", bank)
+
+  let { data: wallets, error: werror} = await supabase
+  .from('crypto_wallets')
+  .select<string, any>().eq('user_id', user?.id).eq('bank_id', bank?.id)
+
+  const { data: cards, error: cerror } = await supabase
+  .from('cards')
+  .select<string, any>().eq('user_id', user?.id).eq('bank_id', bank?.id)
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -43,6 +54,13 @@ export default async function Bank({ params }: { params: { id: string } }) {
             <img src={bank?.logo} />
             {bank?.name}
           </p>
+
+          <Link
+                href="/cards/create"
+                className=""
+              >
+                <Button variant="outline"> Выпустить карту этого банка</Button>
+            </Link>
           
         </div>
 
@@ -50,13 +68,55 @@ export default async function Bank({ params }: { params: { id: string } }) {
 
         <div className="flex flex-col gap-8 text-foreground">
           <h2 className="text-lg font-bold text-center">
-            Мои кошельки
+            Кошельки этого банка
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {wallet?.address}
+            {wallets?.map(({id,address,blockchain,cvv, bank, currency, balance}) => (
+                <a
+                    key={id}
+                    className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
+                    href={`/wallets/${id}`}
+                >
+                    <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
+                    {truncateString(address, 10, 8)}
+                    </h3>
+                    <div className="flex flex-col grow gap-4 justify-between">
+                    <p className="text-sm opacity-70">{blockchain}</p>
+                    <div className="flex justify-between items-center">
+                        {balance} {currency}
+                    </div>
+                    </div>
+                </a>
+                ))}
           </div>
         </div>
 
+        <div className="flex flex-col gap-8 text-foreground">
+          <h2 className="text-lg font-bold text-center">
+            Карты этого банка
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {cards?.map(({id,number,cardholder,cvv, bank, currency, balance}) => (
+                <a
+                    key={id}
+                    className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
+                    href={`/cards/${id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
+                    {number}
+                    </h3>
+                    <div className="flex flex-col grow gap-4 justify-between">
+                    <p className="text-sm opacity-70">{cardholder}</p>
+                    <div className="flex justify-between items-center">
+                        {balance} {currency}
+                    </div>
+                    </div>
+                </a>
+                ))}
+          </div>
+        </div>
 
 
         <div className="flex justify-center text-center text-xs">

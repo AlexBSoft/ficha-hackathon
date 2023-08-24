@@ -50,9 +50,7 @@ export default async function Banks() {
               <a
                 key={id}
                 className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
-                href={`/wallets/${id}`}
-                target="_blank"
-                rel="noreferrer"
+                href={`/banks/${id}`}
               >
                 <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
                   <img src={logo} />

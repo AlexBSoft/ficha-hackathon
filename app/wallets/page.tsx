@@ -46,7 +46,7 @@ export default async function Wallets() {
     await supabase
     .from('crypto_wallets')
     .insert({ address: hash(), balance: 0, currency: "crub", blockchain: "crub", bank_id: 1})
-    
+
     const { data: _wallets, error: _cerror } = await supabase
     .from('crypto_wallets')
     .select<string, any>().eq('user_id', user?.id)
@@ -78,8 +78,6 @@ export default async function Wallets() {
                 key={id}
                 className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
                 href={`/wallets/${id}`}
-                target="_blank"
-                rel="noreferrer"
               >
                 <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
                   {truncateString(address, 10, 8)}
