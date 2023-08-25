@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import {hash} from "@/scripts/scripts"
 import { BankCard } from '@/components/BankCard'
 import { Footer } from '@/components/Footer'
+import { WalletCreateModal } from '@/components/WalletCreateModal'
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
   if (str.length <= firstCharCount + endCharCount) {
@@ -57,7 +58,9 @@ export default async function Bank({ params }: { params: { id: string } }) {
             {bank?.name}
           </p>
 
-          <Link
+            <WalletCreateModal bank={bank} />
+
+            <Link
                 href={`/cards/create?bank_id=${bank?.id}`}
                 className=""
               >
