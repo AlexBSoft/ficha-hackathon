@@ -48,10 +48,10 @@ export default async function Cards() {
             Мои банковские карты
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo}) => (
+            {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo, style}) => (
               <div id={id}>
                 <Link href={`/cards/${id}`}>
-                  <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank_logo} />
+                  <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank_logo} card_style={style} />
                 </Link>
                </div>
             ))}

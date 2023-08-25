@@ -71,13 +71,13 @@ export default async function Admin() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {banks?.map(({ id, name, currency, contry, logo, }) => (
+                            {banks?.map(({ id, name, currency, country, logo, }) => (
                                 <TableRow>
                                     <TableCell className="font-medium"><a
                                         key={id}
                                         href={`/cards/${id}`}
                                     >{name}</a></TableCell>
-                                    <TableCell>{contry}</TableCell>
+                                    <TableCell>{country}</TableCell>
                                     <TableCell>{currency}</TableCell>
                                     <TableCell className="text-right">{logo}</TableCell>
                                 </TableRow>
@@ -101,13 +101,13 @@ export default async function Admin() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {banks?.map(({ id, name, contry, logo, }) => (
+                            {banks?.map(({ id, name, country, logo, }) => (
                                 <TableRow>
                                     <TableCell className="font-medium"><a
                                         key={id}
                                         href={`/cards/${id}`}
                                     >{name}</a></TableCell>
-                                    <TableCell>{contry}</TableCell>
+                                    <TableCell>{country}</TableCell>
                                     <TableCell className="text-right">{logo}</TableCell>
                                 </TableRow>
                             ))}

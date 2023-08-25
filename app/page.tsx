@@ -160,10 +160,10 @@ export default async function Index() {
           <div className="flex overflow-x-auto w-full" style={{maxWidth:'93vw'}}>
           <ScrollArea size="1" scrollbars="horizontal">
             <div className="flex flex-nowrap">
-              {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo}) => (
+              {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo, style}) => (
                 <div id={id} className='mr-6 mb-4'>
                   <Link href={`/cards/${id}`}>
-                    <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank?.logo} name={null} expire_date={null} cvv={null}/>
+                    <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank_logo} card_style={style} name={null} expire_date={null} cvv={null}/>
                   </Link>
                 </div>
               ))}

@@ -22,6 +22,7 @@ import { card_number_to_chuks } from "@/scripts/scripts";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import { Checkbox } from './ui/checkbox';
 
 export function WalletTopUpModal({ wallet }: {  wallet: any} ) {
     const [open, setOpen] = useState(false);
@@ -97,6 +98,18 @@ export function WalletTopUpModal({ wallet }: {  wallet: any} ) {
                 CVV
                 </Label>
                 <Input placeholder="CVV" className="col-span-3" {...register("cvv", { required: true })} />
+            </div>
+
+            <div className="items-top flex space-x-2">
+                <Checkbox id="terms1" />
+                <div className="grid gap-1.5 leading-none">
+                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                        Я принимаю правила использования цифровых кошельков
+                    </label>
+                    <p className="text-sm text-muted-foreground">
+                        Использование цифровых валют регулируется соответствующими законами
+                    </p>
+                </div>
             </div>
             
             </div>

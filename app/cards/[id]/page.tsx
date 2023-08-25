@@ -45,6 +45,7 @@ import { CardTransferModal } from '@/components/CardTransferModal'
 import { CardTopUpModal } from '@/components/CardTopUpModal'
 import { Footer } from '@/components/Footer'
 import { Toaster } from 'react-hot-toast'
+import { BankCard } from '@/components/BankCard'
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
   if (str.length <= firstCharCount + endCharCount) {
@@ -93,49 +94,8 @@ export default async function CardPage({ params }: { params: { id: string } }) {
             Карта
           </p>
           
-          <Box
-            style={{
-              borderRadius: 'var(--radius-4)',
-              color: "white"
-            }}
-            className='hover:shadow-xl'
-          >
-              <Flex
-                direction="column"
-                justify="between"
-                style={
-                  {
-                    height: 168,
-                    width: 300,
-                    position: 'relative',
-                    background: 'linear-gradient(to top right, hsl(226, 70.0%, 55.5%), #E18BFF)',
-                    boxShadow: '0 1px 20px -5px #7971E9AA',
-                    borderRadius: '6px',
-                    '--gray-12': 'white',
-                  } as React.CSSProperties
-                }
-                
-              >
-                <Text weight="medium" mt="3" mx="3" size="2">
-                  {card.cardholder}
-                </Text>
-                <img src={bank.logo} style={{position:'absolute', top: "12px", right: 0, height: "32px"}}/>
-                <Box>
-                  <Flex align="center" gap="3" mb="1" mx="3">
-                    <Text size="2">
-                    {card_number_to_chuks(card?.number)}
-                    </Text>
-                    <IconButton tabIndex={-1} variant="ghost" color="gray" size="1" highContrast>
-                      <CopyIcon />
-                    </IconButton>
-                  </Flex>
-                  <Flex gap="3" mb="2" mx="3">
-                    <Text size="2">{card.expire_date}</Text>
-                    <Text size="2">{card.cvv}</Text>
-                  </Flex>
-                </Box>
-              </Flex>
-          </Box>
+          <BankCard id={card.id} number={card.number} cardholder={card.cardholder} expire_date={card.expire_date} cvv={card.cvv} bank_logo={bank.logo} card_style={card.style} />
+          
         
         <p className='mt-4'>Баланс:</p>
         

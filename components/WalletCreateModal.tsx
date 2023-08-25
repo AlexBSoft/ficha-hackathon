@@ -60,7 +60,7 @@ export function WalletCreateModal({ bank }: {  bank: any} ) {
 
         //
         setOpen(false)
-        router.push(`/wallet/${wallet.id}`)
+        router.push(`/wallets/${wallet.id}`)
         //router.refresh()
     } 
 
@@ -92,7 +92,7 @@ export function WalletCreateModal({ bank }: {  bank: any} ) {
                     Использование цифровых валют регулируется соответствующими законами
                     </p>
                 </div>
-                </div>
+            </div>
             
             </div>
             <DialogFooter>

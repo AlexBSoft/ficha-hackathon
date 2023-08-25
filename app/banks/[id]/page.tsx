@@ -104,7 +104,7 @@ export default async function Bank({ params }: { params: { id: string } }) {
           {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo}) => (
               <div id={id}>
                 <Link href={`/cards/${id}`}>
-                  <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank?.logo} name={null} expire_date={null} cvv={null}/>
+                  <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank?.logo} name={null} expire_date={null} cvv={null} card_style={bank?.card_style}/>
                 </Link>
                </div>
             ))}

@@ -83,7 +83,7 @@ export function NewAdminBankForm({}: {}) {
             return toast.error('Ошибка создания банка')
 
         // После - открываем страницу карты
-        router.push(`/ифтлы/${ddata[0].id}`)
+        router.push(`/banks/${ddata[0].id}`)
     }
 
 
@@ -152,14 +152,19 @@ export function NewAdminBankForm({}: {}) {
                     name="card_style"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Стиль карты</FormLabel>
+                            <FormLabel>Стиль карты.</FormLabel>
                             <FormControl>
-                                <Input placeholder="Лого" {...field} />
+                                <Input placeholder="CSS стиль" {...field} />
                             </FormControl>
+                            <FormDescription>
+                                CSS Градиент или просто CSS бэкграунд для отображения в карточке. Например: `linear-gradient(to right top, rgb(132 153 80), rgb(22 99 25))`
+                            </FormDescription>    
                             <FormMessage />
                         </FormItem>
                     )}
                 />
+
+                <BankCard id={"1999"} number={"4242424242424242"} cardholder={"Cradholder Name"} currency={form.watch("currency") || "rub"} bank_logo={form.watch("logo")} card_style={form.watch('card_style')}  />
 
                 <Button type="submit" className="w-full">Создать</Button>
             </form>
