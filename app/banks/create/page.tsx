@@ -7,16 +7,6 @@ import { NewCardForm } from '@/components/NewCardForm'
 
 export const dynamic = 'force-dynamic'
 
-const myCards = [
-    {
-        bank: "b",
-        number: "4242424242424",
-        balance: "4242",
-        currency: "p",
-        id: "123456"
-    }
-]
-
 export default async function CreateCard() {
   const supabase = createServerComponentClient({ cookies })
 

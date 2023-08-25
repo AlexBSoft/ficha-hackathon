@@ -32,6 +32,9 @@ export default async function Cards() {
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-12">
             Профиль
           </p>
+          <form action="/auth/sign-out" method="post">
+            <Button variant="outline"> Выйти из аккаунта</Button>
+          </form>
         </div>
 
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />

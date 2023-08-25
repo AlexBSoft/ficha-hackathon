@@ -2,6 +2,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import LogoutButton from '@/components/LogoutButton'
+import { Button } from '@radix-ui/themes'
 
 export default async function Navbar() {
     const supabase = createServerComponentClient({ cookies })
@@ -17,12 +18,19 @@ export default async function Navbar() {
                         <img src="https://i.imgur.com/HuAzLhV.png" className="h-8 mr-3" alt="Logo" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
                     </Link>
+                    {user && 
                     <div className="flex items-center md:order-2" style={{ position: "absolute", right: "32px" }}>
                         <Link href="/profile" className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                             <span className="sr-only">Open user menu</span>
                             <img className="w-8 h-8 rounded-full" src="https://i.imgur.com/EqFWbte.jpeg" alt="user photo" />
                         </Link>
                     </div>
+                    }
+                    {!user && <Link
+                            href="/login"
+                            style={{ position: "absolute", right: "32px" }}>
+                            <Button variant="outline">Войти</Button>
+                        </Link>}
                 </div>
             </nav>
 

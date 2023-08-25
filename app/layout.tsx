@@ -15,8 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="min-h-screen container mx-auto  bg-background flex flex-col items-center">
-          <Theme>
+        <main className="min-h-screen container mx-auto bg-background flex flex-col items-center">
+          <Theme className='w-full'>
             {children}
           </Theme>
         </main>
