@@ -1,6 +1,7 @@
 import './globals.css'
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: 'CyberDog (change name)',
@@ -19,6 +20,8 @@ export default function RootLayout({
           <Theme className='w-full'>
             {children}
           </Theme>
+          
+        <Toaster />
         </main>
       </body>
     </html>

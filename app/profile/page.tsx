@@ -9,6 +9,7 @@ export const dynamic = 'force-dynamic'
 import { Button } from "@/components/ui/button"
 import { BankCard } from '@/components/BankCard'
 import { Footer } from '@/components/Footer'
+import { ProfileForm } from '@/components/ProfileForm'
 
 
 export default async function Profile() {
@@ -41,20 +42,19 @@ export default async function Profile() {
 
         <div className="flex flex-col gap-8 text-foreground">
           <h2 className="text-lg font-bold text-center">
-            Мои банковские карты
+            Мои данные
           </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo}) => (
-              <div id={id}>
-                <Link href={`/cards/${id}`}>
-                  <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank_logo} />
-                </Link>
-               </div>
-            ))}
-          </div>
+          
+          <ProfileForm />
+
+
+
+          <form action="/auth/sign-out" method="post">
+            <Button variant="destructive" > Удалить аккаунт</Button>
+          </form>
         </div>
 
-
+        
 
         <Footer />
       </div>

@@ -44,6 +44,7 @@ import {
 import { CardTransferModal } from '@/components/CardTransferModal'
 import { CardTopUpModal } from '@/components/CardTopUpModal'
 import { Footer } from '@/components/Footer'
+import { Toaster } from 'react-hot-toast'
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
   if (str.length <= firstCharCount + endCharCount) {
@@ -166,7 +167,6 @@ export default async function CardPage({ params }: { params: { id: string } }) {
 
           
         </div>
-
 
 
         <Footer />

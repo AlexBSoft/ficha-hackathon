@@ -44,15 +44,23 @@ export function CardTransferModal({ card }: {  card: any} ) {
         .insert({ card_from: card.number, card_to: cardTo, value: data.amount})
         .select()
 
+        const { data: target_card } = await supabase
+        .from('cards')
+        .select<string, any>().eq('number', cardTo)
+        .limit(1).single()
+
+        if(!target_card)
+            return toast.error("Карта получателя не найдена")
+
+        if(target_card.currency != card.currency)
+            return toast.error("Валюта карты не совпадает")
+
         const { error } = await supabase
         .from('cards')
         .update({ balance: Number(card.balance) - Number(data.amount) })
         .eq('id', card.id)
 
-        const { data: target_card } = await supabase
-        .from('cards')
-        .select<string, any>().eq('number', cardTo)
-        .limit(1).single()
+        
 
         await supabase
         .from('cards')
