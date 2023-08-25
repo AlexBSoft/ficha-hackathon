@@ -1,14 +1,29 @@
+"use client"
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import LogoutButton from '@/components/LogoutButton'
 import { Button } from '@radix-ui/themes'
+import { useEffect, useState } from 'react'
 
-export default async function Navbar() {
-    const supabase = createServerComponentClient({ cookies })
-    const {
-        data: { user },
-    } = await supabase.auth.getUser()
+
+
+
+export default function Navbar() {
+    const supabase = createClientComponentClient({  })
+    const [user, setUser] = useState({})
+    
+
+    useEffect(()=>{
+        async function xxx(){
+            const {
+                data: { user },
+            } = await supabase.auth.getUser()
+            setUser(user || {})
+        }
+        xxx()
+    },[])
     return (
         <nav className="w-full flex justify-center border-b border-b-foreground/10" style={{ marginTop: "8px", paddingBottom: "8px" }}>
 

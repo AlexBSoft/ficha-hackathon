@@ -11,7 +11,7 @@ import { BankCard } from '@/components/BankCard'
 import { Footer } from '@/components/Footer'
 
 
-export default async function Cards() {
+export default async function Profile() {
   const supabase = createServerComponentClient({ cookies })
 
   const {
