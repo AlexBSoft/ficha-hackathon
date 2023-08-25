@@ -149,7 +149,7 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
                         <SelectValue placeholder="Кошелек" />
                     </SelectTrigger>
                     <SelectContent >
-                        {wallets?.map(({ address, balance, currency}) => (
+                        {wallets?.map(({ address, balance, currency}: any) => (
                             <SelectItem key={address} value={address}>{balance} {currency}</SelectItem>
                         ))}
                     </SelectContent>
@@ -175,7 +175,7 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
                 
             <div className="grid gap-4 py-4">
 
-            <p>Вы получите {convertCurrencies(form.watch('amount'),wallets.find((e: any) => e.address === form.watch('wallet'))?.currency,  card.currency )} {card.currency} за {} {form.watch('amount')} {wallets.find((e: any) => e.address === form.watch('wallet'))?.currency}</p>
+            <p>Вы получите {convertCurrencies( Number(form.watch('amount')),wallets.find((e: any) => e.address === form.watch('wallet'))?.currency,  card.currency )} {card.currency} за {} {form.watch('amount')} {wallets.find((e: any) => e.address === form.watch('wallet'))?.currency}</p>
 
             
             </div>
