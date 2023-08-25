@@ -34,26 +34,26 @@ export default async function Wallets() {
   .from('crypto_wallets')
   .select<string, any>().eq('user_id', user?.id)
 
-  if(wallets?.length == 0){
+  // if(wallets?.length == 0){
     
-    await supabase
-    .from('crypto_wallets')
-    .insert({ address: hash(), balance: 0, currency: "caed", blockchain: "caed", bank_id: 3 })
+  //   await supabase
+  //   .from('crypto_wallets')
+  //   .insert({ address: hash(), balance: 0, currency: "caed", blockchain: "caed", bank_id: 3 })
 
-    await supabase
-    .from('crypto_wallets')
-    .insert({ address: hash(), balance: 0, currency: "ccny", blockchain: "ccny", bank_id: 2 })
+  //   await supabase
+  //   .from('crypto_wallets')
+  //   .insert({ address: hash(), balance: 0, currency: "ccny", blockchain: "ccny", bank_id: 2 })
 
-    await supabase
-    .from('crypto_wallets')
-    .insert({ address: hash(), balance: 0, currency: "crub", blockchain: "crub", bank_id: 1})
+  //   await supabase
+  //   .from('crypto_wallets')
+  //   .insert({ address: hash(), balance: 0, currency: "crub", blockchain: "crub", bank_id: 1})
 
-    const { data: _wallets, error: _cerror } = await supabase
-    .from('crypto_wallets')
-    .select<string, any>().eq('user_id', user?.id)
+  //   const { data: _wallets, error: _cerror } = await supabase
+  //   .from('crypto_wallets')
+  //   .select<string, any>().eq('user_id', user?.id)
 
-    wallets = _wallets
-  }
+  //   wallets = _wallets
+  // }
 
   return (
     <div className="w-full flex flex-col items-center">
