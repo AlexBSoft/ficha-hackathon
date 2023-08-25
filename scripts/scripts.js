@@ -68,5 +68,81 @@ function card_number_to_chuks(str){
     
     return res_str
 }
+function convertor(amount, from, to){
+    if (to == "RUB"){
+        if (from == "BRL"){
+            return amount * 19.43;
+        }
+        if (from == "CNY"){
+            return amount * 12.97;
+        }
+        if (from == "INR"){
+            return amount * 1.14;
+        }
+        if (from == "ZAR"){
+            return amount * 5.07;
+        }
+    }
+    
+    if (to == "BRL"){
+        if (from == "RUB"){
+            return amount * 0.05;
+        }
+        if (from == "CNY"){
+            return amount * 0.67;
+        }
+        if (from == "INR"){
+            return amount * 0.06;
+        }
+        if (from == "ZAR"){
+            return amount * 0.26;
+        }
+    }
 
-module.exports = {hash, card_number_to_chuks}
+    if (to == "CNY"){
+        if (from == "BRL"){
+            return amount * 1.51;
+        }
+        if (from == "RUB"){
+            return amount * 0.08;
+        }
+        if (from == "INR"){
+            return amount * 0.09;
+        }
+        if (from == "ZAR"){
+            return amount * 0.39;
+        }
+    }
+
+    if (to == "INR"){
+        if (from == "BRL"){
+            return amount * 17.05;
+        }
+        if (from == "CNY"){
+            return amount * 11.38;
+        }
+        if (from == "RUB"){
+            return amount * 0.87;
+        }
+        if (from == "ZAR"){
+            return amount * 4.45;
+        }
+    }
+
+    if (to == "ZAR"){
+        if (from == "BRL"){
+            return amount * 3.83;
+        }
+        if (from == "CNY"){
+            return amount * 2.56;
+        }
+        if (from == "INR"){
+            return amount * 0.22;
+        }
+        if (from == "RUB"){
+            return amount * 0.19;
+        }
+    }
+}
+
+module.exports = {hash, card_number_to_chuks, get_exchange_rate, convertor}
