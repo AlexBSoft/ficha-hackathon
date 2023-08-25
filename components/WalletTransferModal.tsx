@@ -35,7 +35,20 @@ export function WalletTransferModal({ wallet }: {  wallet: any} ) {
 
     const onSubmit: SubmitHandler<any> = async (data) => {
         console.log("submit",data)
-        // Затем мы добавляем запись в базу данных (nзапись это все данные о нашем NFT)
+
+        const { data: target_wallet } = await supabase
+        .from('crypto_wallets')
+        .select<string, any>().eq('address', data.address)
+        .limit(1).single()
+
+
+        if(!target_wallet)
+            return toast.error("Кошелек получателя не найден")
+
+        if(target_wallet.currency != wallet.currency)
+            return toast.error("Валюта кошелька не совпадает")
+
+        // Затем мы добавляем запись в базу данных (nзапись это все данные )
         const { data: ddata, error: derror } = await supabase
         .from('crypto_transactions')
         .insert({ hash: "xxxx", wallet_from: wallet.address, wallet_to: data.address, amount: data.amount})
@@ -46,11 +59,7 @@ export function WalletTransferModal({ wallet }: {  wallet: any} ) {
         .update({ balance: Number(wallet.balance) - Number(data.amount) })
         .eq('id', wallet.id)
 
-        const { data: target_wallet } = await supabase
-        .from('crypto_wallets')
-        .select<string, any>().eq('address', data.address)
-        .limit(1).single()
-
+        
         await supabase
         .from('crypto_wallets')
         .update({ balance: Number(target_wallet.balance) + Number(data.amount) })

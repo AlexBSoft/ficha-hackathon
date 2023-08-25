@@ -50,8 +50,6 @@ export function WalletTopUpModal({ wallet }: {  wallet: any} ) {
 
         console.log(ddata)
 
-        // После - открываем страницу созданного NFT
-        //router.push(`/nft/${ddata[0].id}`)
         setOpen(false)
         router.refresh()
     } 

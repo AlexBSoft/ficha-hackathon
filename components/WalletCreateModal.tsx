@@ -35,11 +35,12 @@ export function WalletCreateModal({ bank }: {  bank: any} ) {
     const onSubmit: SubmitHandler<any> = async (data) => {
         console.log("submit",data)
 
-        await supabase
+        let { data: wallet, error: werror} =  await supabase
         .from('crypto_wallets')
         .insert({ address: hash(), balance: 0, currency: `c${bank.currency}`, blockchain: `c${bank.currency}`, bank_id: bank.id})
+        .select().limit(1).single()
 
-        // Затем мы добавляем запись в базу данных (nзапись это все данные о нашем NFT)
+        // Затем мы добавляем запись в базу данных (nзапись это все данные )
         // const { data: ddata, error: derror } = await supabase
         // .from('crypto_transactions')
         // .insert({ hash: "xxxx", wallet_from: "EXCHANGEDOG", wallet_to:  wallet.address, amount: data.amount})
@@ -57,10 +58,10 @@ export function WalletCreateModal({ bank }: {  bank: any} ) {
         //console.log(ddata)
         toast.success("Кошелек создан")
 
-        // После - открываем страницу созданного NFT
-        //router.push(`/nft/${ddata[0].id}`)
+        //
         setOpen(false)
-        router.refresh()
+        router.push(`/wallet/${wallet.id}`)
+        //router.refresh()
     } 
 
     return (

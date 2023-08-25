@@ -72,18 +72,16 @@ export function ProfileForm({bank_id, currency}: {bank_id?: string, currency?: s
     async function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
+        // console.log(values)
 
-        const { data: ddata, error: derror } = await supabase
-        .from('cards')
-        .insert({ cardholder: values.fio, bank_id: bank_id, currency: currency, expire_date: "08/30", cvv:getRandomIntInclusive(100,999),number: generateBankCardNumber() })
-        .select()
+        // const { data: ddata, error: derror } = await supabase
+        // .from('cards')
+        // .insert({ cardholder: values.fio, bank_id: bank_id, currency: currency, expire_date: "08/30", cvv:getRandomIntInclusive(100,999),number: generateBankCardNumber() })
+        // .select()
 
-        if(derror)
-            return toast.error('Ошибка создания NFT')
+        // if(derror)
+        //     return toast.error('Ошибка сохранения профиля')
 
-        // После - открываем страницу созданного NFT
-        router.push(`/cards/${ddata[0].id}`)
     }
 
 

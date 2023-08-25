@@ -38,7 +38,7 @@ export function CardTransferModal({ card }: {  card: any} ) {
         console.log("submit",data)
 
         let cardTo = data.card.replaceAll(' ', '')
-        // Затем мы добавляем запись в базу данных (nзапись это все данные о нашем NFT)
+        // Затем мы добавляем запись в базу данных (nзапись это все данные )
         const { data: ddata, error: derror } = await supabase
         .from('transactions')
         .insert({ card_from: card.number, card_to: cardTo, value: data.amount})

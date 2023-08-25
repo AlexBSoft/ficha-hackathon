@@ -91,7 +91,7 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
         console.log("submit",data)
 
 
-        // Затем мы добавляем запись в базу данных (nзапись это все данные о нашем NFT)
+        // Затем мы добавляем запись в базу данных
 
         await supabase
         .from('crypto_transactions')

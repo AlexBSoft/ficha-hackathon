@@ -115,9 +115,9 @@ export function NewCardForm({bank_id, currency}: {bank_id?: string, currency?: s
         .select()
 
         if(derror)
-            return toast.error('Ошибка создания NFT')
+            return toast.error('Ошибка создания карты')
 
-        // После - открываем страницу созданного NFT
+        // После - открываем страницу карты
         router.push(`/cards/${ddata[0].id}`)
     }
 
