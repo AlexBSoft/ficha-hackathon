@@ -12,15 +12,14 @@ import { useEffect, useState } from 'react'
 
 export default function Navbar() {
     const supabase = createClientComponentClient({  })
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState<any | null>(null)
     
-
     useEffect(()=>{
         async function xxx(){
             const {
                 data: { user },
             } = await supabase.auth.getUser()
-            setUser(user || {})
+            setUser(user||null)
         }
         xxx()
     },[])

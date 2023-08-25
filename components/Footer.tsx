@@ -41,11 +41,24 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { card_number_to_chuks } from "@/scripts/scripts";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 
 export function Footer({  }: {  } ) {
+    const supabase = createClientComponentClient({  })
+    const [user, setUser] = useState<any | null>(null)
+    
+    useEffect(()=>{
+        async function xxx(){
+            const {
+                data: { user },
+            } = await supabase.auth.getUser()
+            setUser(user||null)
+        }
+        xxx()
+    },[])
+    
     return (
         <>
         <div className="flex justify-center text-center text-xs">
@@ -53,8 +66,8 @@ export function Footer({  }: {  } ) {
             Made in Taganrog
           </p>
         </div>
-    <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
-        <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
+        {user &&<div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+         <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
             <Link href="/"  className="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <svg className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
@@ -112,6 +125,6 @@ export function Footer({  }: {  } ) {
                 <div className="tooltip-arrow" data-popper-arrow></div>
             </div>
         </div>
-    </div></>
+    </div>}</>
     )
 }
