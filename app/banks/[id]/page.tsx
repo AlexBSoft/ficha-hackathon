@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 
 import {hash} from "@/scripts/scripts"
 import { BankCard } from '@/components/BankCard'
+import { Footer } from '@/components/Footer'
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
   if (str.length <= firstCharCount + endCharCount) {
@@ -46,13 +47,13 @@ export default async function Bank({ params }: { params: { id: string } }) {
   .select<string, any>().eq('user_id', user?.id).eq('bank_id', bank?.id)
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full  flex flex-col items-center">
         <Navbar />
 
       <div className="animate-in flex flex-col gap-14 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
         <div className="flex flex-col items-center mb-4 lg:mb-12">
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-12">
-            <img src={bank?.logo} />
+            <img src={bank?.logo} style={{maxWidth:'256px'}} />
             {bank?.name}
           </p>
 
@@ -108,11 +109,7 @@ export default async function Bank({ params }: { params: { id: string } }) {
         </div>
 
 
-        <div className="flex justify-center text-center text-xs">
-          <p>
-            Made in Taganrog
-          </p>
-        </div>
+        <Footer />
       </div>
     </div>
   )

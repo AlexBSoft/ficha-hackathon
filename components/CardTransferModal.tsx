@@ -24,9 +24,10 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { card_number_to_chuks } from "@/scripts/scripts";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
 
 export function CardTransferModal({ card }: {  card: any} ) {
-
+    const [open, setOpen] = useState(false);
     const router = useRouter();
 
     const supabase = createClientComponentClient()
@@ -64,12 +65,13 @@ export function CardTransferModal({ card }: {  card: any} ) {
         }
 
         console.log(ddata)
-
+        
+        setOpen(false)
         router.refresh()
     } 
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
             <Button variant="outline">Перевести {card.currency}</Button>
         </DialogTrigger>

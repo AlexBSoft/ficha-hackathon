@@ -5,6 +5,7 @@ import LogoutButton from '../components/LogoutButton'
 import SupabaseLogo from '../components/SupabaseLogo'
 import NextJsLogo from '../components/NextJsLogo'
 import Navbar from '@/components/Navbar'
+import { Footer } from '@/components/Footer'
 
 export const dynamic = 'force-dynamic'
 
@@ -47,7 +48,7 @@ export default async function Index() {
   } = await supabase.auth.getUser()
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full container mx-auto flex flex-col items-center">
       <Navbar />
 
       <div className="animate-in flex flex-col gap-14 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
@@ -153,18 +154,7 @@ export default async function Index() {
           </div>
         </div>
 
-        <div className="flex justify-center text-center text-xs">
-          <p>
-            Powered by{' '}
-            <Link
-              href="https://supabase.com/"
-              target="_blank"
-              className="font-bold"
-            >
-              Supabase
-            </Link>
-          </p>
-        </div>
+        <Footer />
       </div>
     </div>
   )

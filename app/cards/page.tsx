@@ -8,6 +8,7 @@ export const dynamic = 'force-dynamic'
 
 import { Button } from "@/components/ui/button"
 import { BankCard } from '@/components/BankCard'
+import { Footer } from '@/components/Footer'
 
 
 export default async function Cards() {
@@ -59,11 +60,7 @@ export default async function Cards() {
 
 
 
-        <div className="flex justify-center text-center text-xs">
-          <p>
-            Made in Taganrog
-          </p>
-        </div>
+        <Footer />
       </div>
     </div>
   )

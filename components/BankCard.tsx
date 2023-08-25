@@ -44,8 +44,6 @@ import { card_number_to_chuks } from "@/scripts/scripts";
 
 export function BankCard({ number, name, cardholder, balance, bank_logo, expire_date, cvv, currency, id }: {  number?: any, name?: any, cardholder?: any, balance?: any, bank_logo?: any,  expire_date?: any, cvv?: any, currency?:any, id?: any} ) {
 
-
-
     return (
         <Box
             style={{

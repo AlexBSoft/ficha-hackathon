@@ -9,6 +9,7 @@ export const dynamic = 'force-dynamic'
 import { Button } from "@/components/ui/button"
 
 import {hash} from "@/scripts/scripts"
+import { Footer } from '@/components/Footer'
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
   if (str.length <= firstCharCount + endCharCount) {
@@ -95,11 +96,7 @@ export default async function Wallets() {
 
 
 
-        <div className="flex justify-center text-center text-xs">
-          <p>
-            Made in Taganrog
-          </p>
-        </div>
+        <Footer />
       </div>
     </div>
   )

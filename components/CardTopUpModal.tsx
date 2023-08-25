@@ -76,7 +76,7 @@ function convertCurrencies(amount: number, cur1: string, cur2: string){
 }
 
 export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) {
-
+    const [open, setOpen] = useState(false);
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
       })
@@ -119,14 +119,14 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
         }
 
         console.log(ddata)
-
+        setOpen(false)
         router.refresh()
     } 
 
 
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
             <Button variant="outline">Пополнить карту используя кошелек</Button>
         </DialogTrigger>

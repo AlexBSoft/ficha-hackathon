@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import {hash} from "@/scripts/scripts"
 import { WalletTransferModal } from '@/components/WalletTransferModal'
 import { WalletTopUpModal } from '@/components/WalletTopUpModal'
+import { Footer } from '@/components/Footer'
 
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
@@ -79,11 +80,7 @@ export default async function Wallet({ params }: { params: { id: string } }) {
 
 
 
-        <div className="flex justify-center text-center text-xs">
-          <p>
-            Made in Taganrog
-          </p>
-        </div>
+        <Footer />
       </div>
     </div>
   )

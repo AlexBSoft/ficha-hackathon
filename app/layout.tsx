@@ -15,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="min-h-screen bg-background flex flex-col items-center">
+        <main className="min-h-screen container mx-auto  bg-background flex flex-col items-center">
           <Theme>
-          {children}
+            {children}
           </Theme>
         </main>
       </body>
