@@ -42,7 +42,7 @@ export default async function Index() {
     .select<string, any>().eq('user_id', user?.id)
 
   return (
-    <div className="w-full container mx-auto flex flex-col items-center">
+    <div className="w-full mx-auto flex flex-col items-center">
       <Navbar />
 
       <div className="animate-in flex flex-col gap-14 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
