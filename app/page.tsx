@@ -8,6 +8,7 @@ import Navbar from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { BankCard } from '@/components/BankCard'
 import { Button, ScrollArea } from '@radix-ui/themes'
+import { convertor } from '@/scripts/scripts'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,6 +22,19 @@ function truncateString(str: String, firstCharCount = str.length, endCharCount =
   return `${firstPortion}${dots}${endPortion}`;
 }
 
+function totalBalanceRUB(wallets?: any[], cards?: any[]){
+  let Mybalance = 0
+
+  wallets?.map(({id,address,blockchain,cvv, bank, currency, balance}) => (
+    Mybalance+=convertor(balance,currency.substring(1),"rub")||0
+  ))
+
+  cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo, style}) => (
+    Mybalance+=convertor(balance,currency,"rub")||0
+  ))
+
+  return Mybalance
+}
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
@@ -102,6 +116,10 @@ export default async function Index() {
         </>
         }
         {user && <>
+
+          <h3>Баланс всех моих счетов:</h3>
+
+          {totalBalanceRUB(wallets || undefined,cards || undefined)} руб
 
           <h3>Банки системы</h3>
 

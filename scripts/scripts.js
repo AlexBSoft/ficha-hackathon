@@ -69,6 +69,12 @@ function card_number_to_chuks(str){
     return res_str
 }
 function convertor(amount, from, to){
+    from = from.toUpperCase()
+    to = to.toUpperCase()
+
+    if(to == from)
+        return amount
+
     if (to == "RUB"){
         if (from == "BRL"){
             return amount * 19.43;
@@ -82,6 +88,8 @@ function convertor(amount, from, to){
         if (from == "ZAR"){
             return amount * 5.07;
         }
+        if (from == "AED")
+            return amount * 0.039;
     }
     
     if (to == "BRL"){
@@ -97,6 +105,8 @@ function convertor(amount, from, to){
         if (from == "ZAR"){
             return amount * 0.26;
         }
+        if (from == "AED")
+            return amount * 0.76;
     }
 
     if (to == "CNY"){
@@ -112,6 +122,8 @@ function convertor(amount, from, to){
         if (from == "ZAR"){
             return amount * 0.39;
         }
+        if (from == "AED")
+            return amount * 0.50;
     }
 
     if (to == "INR"){
@@ -127,6 +139,8 @@ function convertor(amount, from, to){
         if (from == "ZAR"){
             return amount * 4.45;
         }
+        if (from == "AED")
+            return amount * 0.044;
     }
 
     if (to == "ZAR"){
@@ -142,6 +156,25 @@ function convertor(amount, from, to){
         if (from == "RUB"){
             return amount * 0.19;
         }
+        if (from == "AED")
+            return amount * 0.20;
+    }
+
+    if (to == "AED"){
+        if (from == "BRL"){
+            return amount * 1.32;
+        }
+        if (from == "CNY"){
+            return amount * 1.98;
+        }
+        if (from == "INR"){
+            return amount * 22.48;
+        }
+        if (from == "RUB"){
+            return amount * 25.93;
+        }
+        if (from == "ZAR")
+            return amount * 5.07;
     }
 }
 
