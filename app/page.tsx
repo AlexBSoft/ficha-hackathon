@@ -11,6 +11,17 @@ import { ScrollArea } from '@radix-ui/themes'
 
 export const dynamic = 'force-dynamic'
 
+function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
+  if (str.length <= firstCharCount + endCharCount) {
+    return str; // No truncation needed
+  }
+  const firstPortion = str.slice(0, firstCharCount);
+  const endPortion = str.slice(-endCharCount);
+  const dots = '.'.repeat(dotCount);
+  return `${firstPortion}${dots}${endPortion}`;
+}
+
+
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
 
@@ -73,18 +84,14 @@ export default async function Index() {
           <div className="flex overflow-x-auto w-full" style={{maxWidth:'93vw'}}>
           <ScrollArea size="1" scrollbars="horizontal" >
             <div className="flex flex-nowrap">
-              {banks?.map(({ id, logo, name, country, currency, balance }) => (
-                <Link
-                  key={id}
-                  className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mr-6"
-                  href={`/banks/${id}`}
-                >
-                  <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px] max-w-[256px]">
-                    <img src={logo} />
-                    {name}
+              {wallets?.map(({id,address,blockchain,cvv, bank, currency, balance}) => (
+                <Link key={id} className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mr-6 mb-4"
+                  href={`/wallets/${id}`}>
+                  <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
+                    {truncateString(address, 10, 8)}
                   </h3>
                   <div className="flex flex-col grow gap-4 justify-between">
-                    <p className="text-sm opacity-70">{country}</p>
+                    <p className="text-sm opacity-70">{blockchain}</p>
                     <div className="flex justify-between items-center">
                       {balance} {currency}
                     </div>
