@@ -41,6 +41,8 @@ import {
     TextField,
     Theme,
   } from '@radix-ui/themes';
+import { CardTransferModal } from '@/components/CardTransferModal'
+import { CardTopUpModal } from '@/components/CardTopUpModal'
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
   if (str.length <= firstCharCount + endCharCount) {
@@ -73,7 +75,11 @@ export default async function CardPage({ params }: { params: { id: string } }) {
 
   let { data: transactions, error: terror } = await supabase
   .from('transactions')
-  .select<string, any>().or(`card_from.eq.${card.id},card_to.eq.${card.id}`)
+  .select<string, any>().or(`card_from.eq.${card.number},card_to.eq.${card.number}`)
+
+  let { data: wallets, error: werror } = await supabase
+  .from('crypto_wallets')
+  .select<string, any>().eq('user_id', user?.id)
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -134,13 +140,9 @@ export default async function CardPage({ params }: { params: { id: string } }) {
           <p className="text-2xl lg:text-3xl !leading-tight mx-auto max-w-xl text-center my-12">{card?.balance} 
           <span className="text-sm"> {card?.currency}</span></p>
 
-            <Link href="/cards/create"className="">
-                <Button variant="outline"> Перевести</Button>
-            </Link>
+            <CardTransferModal card={card} />
 
-            <Link href="/cards/create"className="">
-                <Button variant="outline"> Пополнить</Button>
-            </Link>
+            <CardTopUpModal card={card} wallets={wallets} />
         </div>
 
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
@@ -150,24 +152,13 @@ export default async function CardPage({ params }: { params: { id: string } }) {
             Транзакции
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {transactions?.map(({id,number,cardholder,cvv, bank, currency, balance}) => (
-                <a
-                    key={id}
-                    className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
-                    href={`/cards/${id}`}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
-                    {number}
-                    </h3>
-                    <div className="flex flex-col grow gap-4 justify-between">
-                    <p className="text-sm opacity-70">{cardholder}</p>
-                    <div className="flex justify-between items-center">
-                        {balance} {currency}
-                    </div>
-                    </div>
-                </a>
+          {transactions?.map(({id,card_from,card_to,value, created_at}) => (
+               <div className='mb-4' id={id}>
+                <p>{value} {card.currency}</p>
+                <p>from {card_from}</p>
+                <p>to {card_to}</p>
+                <p>{created_at}</p>
+                </div>
                 ))}
           </div>
           

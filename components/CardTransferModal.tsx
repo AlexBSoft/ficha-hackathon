@@ -25,7 +25,7 @@ import { card_number_to_chuks } from "@/scripts/scripts";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
-export function WalletTransferModal({ wallet }: {  wallet: any} ) {
+export function CardTransferModal({ card }: {  card: any} ) {
 
     const router = useRouter();
 
@@ -35,26 +35,28 @@ export function WalletTransferModal({ wallet }: {  wallet: any} ) {
 
     const onSubmit: SubmitHandler<any> = async (data) => {
         console.log("submit",data)
+
+        let cardTo = data.card.replaceAll(' ', '')
         // Затем мы добавляем запись в базу данных (nзапись это все данные о нашем NFT)
         const { data: ddata, error: derror } = await supabase
-        .from('crypto_transactions')
-        .insert({ hash: "xxxx", wallet_from: wallet.address, wallet_to: data.address, amount: data.amount})
+        .from('transactions')
+        .insert({ card_from: card.number, card_to: cardTo, value: data.amount})
         .select()
 
         const { error } = await supabase
-        .from('crypto_wallets')
-        .update({ balance: Number(wallet.balance) - Number(data.amount) })
-        .eq('id', wallet.id)
+        .from('cards')
+        .update({ balance: Number(card.balance) - Number(data.amount) })
+        .eq('id', card.id)
 
-        const { data: target_wallet } = await supabase
-        .from('crypto_wallets')
-        .select<string, any>().eq('address', data.address)
+        const { data: target_card } = await supabase
+        .from('cards')
+        .select<string, any>().eq('number', cardTo)
         .limit(1).single()
 
         await supabase
-        .from('crypto_wallets')
-        .update({ balance: Number(target_wallet.balance) + Number(data.amount) })
-        .eq('address', data.address)
+        .from('cards')
+        .update({ balance: Number(target_card.balance) + Number(data.amount) })
+        .eq('number', cardTo)
 
         if(derror || error){
             console.log("error",derror,error)
@@ -69,7 +71,7 @@ export function WalletTransferModal({ wallet }: {  wallet: any} ) {
     return (
         <Dialog>
         <DialogTrigger asChild>
-            <Button variant="outline">Перевести {wallet.currency}</Button>
+            <Button variant="outline">Перевести {card.currency}</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -82,9 +84,9 @@ export function WalletTransferModal({ wallet }: {  wallet: any} ) {
             <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="name" className="text-right">
-                Кошелек
+                Номер карты
                 </Label>
-                <Input placeholder="0x0000" className="col-span-3" {...register("address", { required: true })} />
+                <Input placeholder="4242 4242 4242 4242" className="col-span-3" {...register("card", { required: true })} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="username" className="text-right">

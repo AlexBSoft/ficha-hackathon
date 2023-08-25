@@ -141,7 +141,7 @@ export function NewCardForm({bank_id, currency}: {bank_id?: string, currency?: s
 
                 <p>Валюта карты: {currency}</p>
 
-                <BankCard id={"1999"} number={"4242424242424242"} cardholder={form.getValues("fio") || "Cradholder Name"} currency={currency || "rub"}  />
+                <BankCard id={"1999"} number={"4242424242424242"} cardholder={form.watch("fio") || "Cradholder Name"} currency={currency || "rub"}  />
 
 
                 <Button type="submit" className="w-full">Создать</Button>
