@@ -99,7 +99,6 @@ export function WalletCreateModal({ bank }: {  bank: any} ) {
             <Button type="submit">Создать</Button>
             </DialogFooter>
             </form>
-            <Toaster />
         </DialogContent>
         </Dialog>
     )

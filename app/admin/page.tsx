@@ -48,10 +48,10 @@ export default async function Admin() {
                     </p>
 
                     <Link
-                        href="/cards/create"
+                        href="/admin/createbank"
                         className=""
                     >
-                        <Button variant="outline"> Подключить банк</Button>
+                        <Button variant="outline"> Подключить новый банк</Button>
                     </Link>
                 </div>
 
@@ -66,6 +66,37 @@ export default async function Admin() {
                             <TableRow>
                                 <TableHead className="w-[100px]">Название</TableHead>
                                 <TableHead>Страна</TableHead>
+                                <TableHead>Валюта</TableHead>
+                                <TableHead>Лого</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {banks?.map(({ id, name, currency, contry, logo, }) => (
+                                <TableRow>
+                                    <TableCell className="font-medium"><a
+                                        key={id}
+                                        href={`/cards/${id}`}
+                                    >{name}</a></TableCell>
+                                    <TableCell>{contry}</TableCell>
+                                    <TableCell>{currency}</TableCell>
+                                    <TableCell className="text-right">{logo}</TableCell>
+                                </TableRow>
+                            ))}
+
+                        </TableBody>
+                    </Table>
+
+                </div>
+
+                <div className="flex flex-col gap-8 text-foreground">
+                    <h2 className="text-lg font-bold text-center">
+                        Пользователи в системе
+                    </h2>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className="w-[100px]">Название</TableHead>
+                                <TableHead>Страна</TableHead>
                                 <TableHead>Лого</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -74,7 +105,6 @@ export default async function Admin() {
                                 <TableRow>
                                     <TableCell className="font-medium"><a
                                         key={id}
-                                        className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground"
                                         href={`/cards/${id}`}
                                     >{name}</a></TableCell>
                                     <TableCell>{contry}</TableCell>
@@ -86,6 +116,7 @@ export default async function Admin() {
                     </Table>
 
                 </div>
+
 
 
 

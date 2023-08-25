@@ -87,7 +87,7 @@ function generateBankCardNumber() {
     return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
   }
 
-export function NewCardForm({bank_id, currency}: {bank_id?: string, currency?: string}) {
+export function NewCardForm({bank_id, currency, bank_card_style}: {bank_id?: string, currency?: string, bank_card_style?: string}) {
 
     const supabase = createClientComponentClient()
     const router = useRouter()
@@ -111,7 +111,8 @@ export function NewCardForm({bank_id, currency}: {bank_id?: string, currency?: s
 
         const { data: ddata, error: derror } = await supabase
         .from('cards')
-        .insert({ cardholder: values.fio, bank_id: bank_id, currency: currency, expire_date: "08/30", cvv:getRandomIntInclusive(100,999),number: generateBankCardNumber() })
+        .insert({ cardholder: values.fio, bank_id: bank_id, currency: currency, expire_date: "08/30", cvv:getRandomIntInclusive(100,999),number: generateBankCardNumber(),
+    style: bank_card_style })
         .select()
 
         if(derror)

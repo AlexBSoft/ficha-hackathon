@@ -54,7 +54,7 @@ export default async function CreateCard({
           {bank?.logo && <img src={bank?.logo} style={{height: "48px"}} />}
         </div>
 
-        <NewCardForm bank_id={bank.id} currency={bank.currency} />
+        <NewCardForm bank_id={bank.id} currency={bank.currency} bank_card_style={bank.card_style} />
 
         <div className="flex justify-center text-center text-xs">
           <p>

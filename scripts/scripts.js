@@ -145,4 +145,4 @@ function convertor(amount, from, to){
     }
 }
 
-module.exports = {hash, card_number_to_chuks, get_exchange_rate, convertor}
+module.exports = {hash, card_number_to_chuks, convertor}
