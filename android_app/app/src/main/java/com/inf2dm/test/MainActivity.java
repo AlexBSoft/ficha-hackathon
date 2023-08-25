@@ -18,6 +18,6 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
 
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("http://10.0.2.2:5500");
+        myWebView.loadUrl("https://ficha-hackathon.vercel.app/");
     }
 }
