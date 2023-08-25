@@ -31,12 +31,12 @@ export default async function Banks() {
             Банки системы
           </p>
           
-            <Link
+            {/*<Link
                 href="/cards/create"
                 className=""
               >
                 <Button variant="outline"> Выпустить новую карту</Button>
-            </Link>
+  </Link>*/}
         </div>
 
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />

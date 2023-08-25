@@ -42,7 +42,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { card_number_to_chuks } from "@/scripts/scripts";
 
 
-export function BankCard({ number, name, cardholder, balance, bank_logo, expire_date, cvv }: {  number: string, name: string, cardholder: string, balance: string, bank_logo: string,  expire_date: string, cvv: string } ) {
+export function BankCard({ number, name, cardholder, balance, bank_logo, expire_date, cvv, currency, id }: {  number?: any, name?: any, cardholder?: any, balance?: any, bank_logo?: any,  expire_date?: any, cvv?: any, currency?:any, id?: any} ) {
 
 
 
@@ -86,6 +86,8 @@ export function BankCard({ number, name, cardholder, balance, bank_logo, expire_
                   <Flex gap="3" mb="2" mx="3">
                     <Text size="2">{expire_date}</Text>
                     <Text size="2">{cvv}</Text>
+                    <Text size="2">{balance}</Text>
+                    <Text size="2">{currency}</Text>
                   </Flex>
                 </Box>
               </Flex>

@@ -33,6 +33,10 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 import { useForm, SubmitHandler } from "react-hook-form"
 
+
+import { useSearchParams } from 'next/navigation';
+import { BankCard } from "./BankCard";
+
 const formSchema = z.object({
     fio: z.string(),
     bank: z.string(),
@@ -83,10 +87,12 @@ function generateBankCardNumber() {
     return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
   }
 
-export function NewCardForm() {
+export function NewCardForm({bank_id, currency}: {bank_id?: string, currency?: string}) {
 
     const supabase = createClientComponentClient()
     const router = useRouter()
+
+    const searchParams = useSearchParams();    
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -105,7 +111,7 @@ export function NewCardForm() {
 
         const { data: ddata, error: derror } = await supabase
         .from('cards')
-        .insert({ cardholder: values.fio, bank: values.bank, currency: values.currency, expire_date: "08/30", cvv:getRandomIntInclusive(100,999),number: generateBankCardNumber() })
+        .insert({ cardholder: values.fio, bank_id: bank_id, currency: currency, expire_date: "08/30", cvv:getRandomIntInclusive(100,999),number: generateBankCardNumber() })
         .select()
 
         if(derror)
@@ -124,7 +130,7 @@ export function NewCardForm() {
                     name="fio"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>ФИО держателя</FormLabel>
+                            <FormLabel>ФИО держателя (cardholder)</FormLabel>
                             <FormControl>
                                 <Input placeholder="ФИО" {...field} />
                             </FormControl>
@@ -132,52 +138,13 @@ export function NewCardForm() {
                         </FormItem>
                     )}
                 />
-                <FormField
-                    control={form.control}
-                    name="bank"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Банк карты</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Банк" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
 
-                <FormField
-                    control={form.control}
-                    name="currency"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Банк карты</FormLabel>
-                            <FormControl>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Валюта" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                    <SelectLabel>Валюта</SelectLabel>
-                                    <SelectItem value="rub">Рубли</SelectItem>
-                                    <SelectItem value="cny">Китайские Юани</SelectItem>
-                                    <SelectItem value="brl">Бразильский реал</SelectItem>
-                                    <SelectItem value="inr">Индийская рупия</SelectItem>
-                                    <SelectItem value="zar">Южноафриканский рэнд</SelectItem>
-                                    </SelectGroup>
-                                </SelectContent>
-                                </Select>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                <p>Валюта карты: {currency}</p>
+
+                <BankCard id={"1999"} number={"4242424242424242"} cardholder={form.getValues("fio") || "Cradholder Name"} currency={currency || "rub"}  />
 
 
-
-
-                <Button type="submit">Создать</Button>
+                <Button type="submit" className="w-full">Создать</Button>
             </form>
         </Form>
     )
