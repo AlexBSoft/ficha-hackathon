@@ -47,9 +47,9 @@ export default async function Cards() {
           <h2 className="text-lg font-bold text-center">
             Мои банковские карты
           </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-5">
             {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo, style}) => (
-              <div id={id}>
+              <div id={id} >
                 <Link href={`/cards/${id}`}>
                   <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank_logo} card_style={style} />
                 </Link>
