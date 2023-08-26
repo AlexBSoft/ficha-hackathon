@@ -23,6 +23,7 @@ import { card_number_to_chuks } from "@/scripts/scripts";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { Checkbox } from './ui/checkbox';
+import { Import } from 'lucide-react';
 
 export function WalletTopUpModal({ wallet }: {  wallet: any} ) {
     const [open, setOpen] = useState(false);
@@ -58,7 +59,7 @@ export function WalletTopUpModal({ wallet }: {  wallet: any} ) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-            <Button variant="outline">Пополнить кошелек с банковской карты</Button>
+            <Button variant="outline"><Import className="mr-2 h-4 w-4" /> Пополнить кошелек с банковской карты</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>

@@ -24,6 +24,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { card_number_to_chuks } from "@/scripts/scripts";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { Send } from "lucide-react";
 
 export function WalletTransferModal({ wallet }: {  wallet: any} ) {
 
@@ -78,7 +79,7 @@ export function WalletTransferModal({ wallet }: {  wallet: any} ) {
     return (
         <Dialog>
         <DialogTrigger asChild>
-            <Button variant="outline">Перевести {wallet.currency}</Button>
+            <Button variant="outline"><Send className="mr-2 h-4 w-4" /> Перевести {wallet.currency}</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>

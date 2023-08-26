@@ -12,6 +12,7 @@ import {hash} from "@/scripts/scripts"
 import { WalletTransferModal } from '@/components/WalletTransferModal'
 import { WalletTopUpModal } from '@/components/WalletTopUpModal'
 import { Footer } from '@/components/Footer'
+import { ScrollArea } from '@radix-ui/themes'
 
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
@@ -51,13 +52,26 @@ export default async function Wallet({ params }: { params: { id: string } }) {
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-12">
             Кошелек
           </p>
+
+          <div className="flex overflow-x-auto w-full" style={{maxWidth:'93vw'}}>
+          <ScrollArea size="1"  scrollbars="horizontal">
+            <div className="flex flex-nowrap mb-4">
           {wallet?.address}
+          </div>
+          </ScrollArea>
+          </div>
 
-          <p>{wallet?.balance} {wallet?.currency}</p>
+          <p className='mt-4'>Баланс:</p>
 
+          <p className="text-2xl lg:text-3xl !leading-tight mx-auto max-w-xl text-center my-12">{wallet?.balance} 
+          <span className="text-sm"> {wallet?.currency}</span></p>
+
+            <p className='mb-3'>
             <WalletTransferModal wallet={wallet} />
-
+            </p>
+            <p>
             <WalletTopUpModal wallet={wallet} />
+            </p>
         </div>
 
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
