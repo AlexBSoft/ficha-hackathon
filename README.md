@@ -1,3 +1,55 @@
+ # PayDog
+
+### Стек:
+
+- NextJS 13 (серверные компоненты имба)
+- Tailwindcss
+- Supabase (Serverless бэкенд Postgresql)
+
+## Разворачивание
+
+Создать проект в Supabase
+
+В .env запихать токены
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://viazgenvxhxifrngevpp.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpYXpnZW52eGh4aWZybmdldnBwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI4NzcwNDIsImV4cCI6MjAwODQ1MzA0Mn0.zuZ24NJTXhzjkRrSL0_YHo6DE-wEL9z2KJXMNusuyi4
+```
+
+Запустить npm run dev
+
+## Как работает
+
+Все страницы в директории /app/
+
+Страницы рендерятся на сервере, идет обращение к Supabase для получения данных из базы
+
+## Юзкейсы
+
+1. Юзер регается
+
+2. Выбирает банк, создает кошелек (например российский банк и кошелек с цифровым рублем)
+
+3. Пополняет кошелек своей имеющейся картой (mockup добавление денег) - карта здесь внешняя
+
+4. Выбирает зарубежный банк и создает там карту. Пополняет эту карту со своего кошелька. Происходит конвертация
+
+5. ???
+
+6. Profit (юзер имеет баланс на карте, платит ей в сервисах где хочет)
+
+### Подлкючение банка
+
+Банк добавляет админ в админке: /admin
+
+Для банков можно брендировать карту (указать логотип и сделать свой градиент у карты)
+
+### Курсы валют
+
+Курсы валют захардкожены в /scripts/scripts.js. Мы их питоном вытянули с сайта ЦБ.
+
+
 # Supabase Starter
 
 This starter configures Supabase Auth to use cookies, making the user's session available throughout the entire Next.js app - Client Components, Server Components, Route Handlers, Server Actions and Middleware.

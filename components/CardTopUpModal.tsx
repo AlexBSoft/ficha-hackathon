@@ -38,11 +38,12 @@ import {
 
 // Supabase - в него мы грузим данные
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { card_number_to_chuks } from "@/scripts/scripts";
+import { card_number_to_chuks, convertor } from "@/scripts/scripts";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { Wallet } from "lucide-react";
+import { Checkbox } from "./ui/checkbox";
 
 const FormSchema = z.object({
     wallet: z.string(),
@@ -100,7 +101,13 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
 
         const { data: ddata, error: derror } = await supabase
         .from('transactions')
-        .insert({ card_from: "EXCHANGEDOG", card_to: card.number, value: data.amount})
+        .insert({ card_from: "EXCHANGEDOG", card_to: card.number, 
+            value: Number(convertor(
+                data.amount,
+                wallets.find( (e: any) => e.address == data.wallet )?.currency.substring(1),
+                card.currency
+                ))
+        })
         .select()
 
         const { error } = await supabase
@@ -111,7 +118,13 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
 
         await supabase
         .from('cards')
-        .update({ balance: Number(card.balance) + Number(data.amount) })
+        .update({ balance: Number(card.balance) + 
+            Number(convertor(
+                data.amount,
+                wallets.find( (e: any) => e.address == data.wallet )?.currency.substring(1),
+                card.currency
+                )) 
+        })
         .eq('number', card.number)
 
         if(derror || error){
@@ -135,7 +148,7 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
             <DialogHeader>
             <DialogTitle>Пополнение</DialogTitle>
             <DialogDescription>
-                Проверьте адрес перед отправкой
+                Пополнение карты через обменник ExchangeDog
             </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -173,10 +186,26 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
                     )}
                 />
 
+                <div className="flex items-center space-x-2 mt-3">
+                <Checkbox id="terms" checked={true}/>
+                <label
+                    htmlFor="terms"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                    Я согласен с правилами конвертации средств обменника ExchangeDog
+                </label>
+                </div>
                 
             <div className="grid gap-4 py-4">
 
-            <p>Вы получите {convertCurrencies( Number(form.watch('amount')),wallets.find((e: any) => e.address === form.watch('wallet'))?.currency,  card.currency )} {card.currency} за {} {form.watch('amount')} {wallets.find((e: any) => e.address === form.watch('wallet'))?.currency}</p>
+            <p>Вы получите {' '}
+                { Number(convertor(
+                form.watch('amount'),
+                wallets.find( (e: any) => e.address == form.watch('wallet') )?.currency.substring(1) || "rub",
+                card.currency
+                )) || 0 }
+                {' '}
+               {card.currency} за {} {form.watch('amount')} {wallets.find((e: any) => e.address === form.watch('wallet'))?.currency||""}</p>
 
             
             </div>

@@ -179,7 +179,7 @@ export default async function Index() {
               {banks?.map(({ id, logo, name, country, currency, balance }) => (
                 <Link
                   key={id}
-                  className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mr-6"
+                  className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mr-6 min-w-[200px]"
                   href={`/banks/${id}`}
                 >
                   <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px] max-w-[256px]">
