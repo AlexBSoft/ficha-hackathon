@@ -42,6 +42,7 @@ import { card_number_to_chuks } from "@/scripts/scripts";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import { Wallet } from "lucide-react";
 
 const FormSchema = z.object({
     wallet: z.string(),
@@ -128,7 +129,7 @@ export function CardTopUpModal({ card, wallets }: {  card: any, wallets: any} ) 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-            <Button variant="outline">Пополнить карту используя кошелек</Button>
+            <Button variant="outline"><Wallet className="mr-2 h-4 w-4" /> Пополнить карту используя кошелек</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>

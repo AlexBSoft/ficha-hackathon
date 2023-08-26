@@ -102,7 +102,9 @@ export default async function CardPage({ params }: { params: { id: string } }) {
           <p className="text-2xl lg:text-3xl !leading-tight mx-auto max-w-xl text-center my-12">{card?.balance} 
           <span className="text-sm"> {card?.currency}</span></p>
 
+          <div className='mb-3'>
             <CardTransferModal card={card} />
+            </div>
 
             <CardTopUpModal card={card} wallets={wallets} />
         </div>

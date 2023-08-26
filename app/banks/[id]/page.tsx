@@ -12,6 +12,7 @@ import {hash} from "@/scripts/scripts"
 import { BankCard } from '@/components/BankCard'
 import { Footer } from '@/components/Footer'
 import { WalletCreateModal } from '@/components/WalletCreateModal'
+import { CreditCard } from 'lucide-react'
 
 function truncateString(str: String, firstCharCount = str.length, endCharCount = 0, dotCount = 3) {
   if (str.length <= firstCharCount + endCharCount) {
@@ -62,9 +63,9 @@ export default async function Bank({ params }: { params: { id: string } }) {
 
             <Link
                 href={`/cards/create?bank_id=${bank?.id}`}
-                className=""
+                className="mt-3"
               >
-                <Button variant="outline"> Выпустить карту этого банка</Button>
+                <Button variant="outline"><CreditCard className="mr-2 h-4 w-4" /> Выпустить карту этого банка</Button>
             </Link>
           
         </div>

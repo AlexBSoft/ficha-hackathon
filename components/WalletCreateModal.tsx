@@ -23,6 +23,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import { Wallet } from 'lucide-react';
 
 export function WalletCreateModal({ bank }: {  bank: any} ) {
     const [open, setOpen] = useState(false);
@@ -67,7 +68,7 @@ export function WalletCreateModal({ bank }: {  bank: any} ) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-            <Button variant="outline">Создать цифровой кошелек</Button>
+            <Button variant="outline"><Wallet className="mr-2 h-4 w-4" /> Создать цифровой кошелек</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>

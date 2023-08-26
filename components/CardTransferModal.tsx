@@ -25,6 +25,7 @@ import { card_number_to_chuks } from "@/scripts/scripts";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import { Send } from "lucide-react";
 
 export function CardTransferModal({ card }: {  card: any} ) {
     const [open, setOpen] = useState(false);
@@ -81,7 +82,7 @@ export function CardTransferModal({ card }: {  card: any} ) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-            <Button variant="outline">Перевести {card.currency}</Button>
+            <Button variant="outline"><Send className="mr-2 h-4 w-4" /> Перевести {card.currency}</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
