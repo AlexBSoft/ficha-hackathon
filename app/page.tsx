@@ -9,6 +9,7 @@ import { Footer } from '@/components/Footer'
 import { BankCard } from '@/components/BankCard'
 import { Button, ScrollArea } from '@radix-ui/themes'
 import { convertor } from '@/scripts/scripts'
+import { CreditCard, Wallet } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -119,7 +120,56 @@ export default async function Index() {
 
           <h3>Баланс всех моих счетов:</h3>
 
-          {totalBalanceRUB(wallets || undefined,cards || undefined)} руб
+          <p className="text-2xl lg:text-3xl !leading-tight max-w-xl">{totalBalanceRUB(wallets || undefined,cards || undefined)}
+          <span className="text-sm">{' '}руб</span></p>
+
+          <h3>Мои карты</h3>
+
+
+          <div className="flex overflow-x-auto w-full" style={{maxWidth:'93vw'}}>
+          <ScrollArea size="1" scrollbars="horizontal">
+            <div className="flex flex-nowrap">
+
+            {cards?.length==0 && <Link href="/banks" className="">
+                <Button variant="outline"><CreditCard className="mr-2 h-4 w-4" /> Выбрать банк и выпустить новую карту</Button>
+            </Link>}
+
+              {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo, style}) => (
+                <div id={id} className='mr-6 mb-4'>
+                  <Link href={`/cards/${id}`}>
+                    <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank_logo} card_style={style} name={null} expire_date={null} cvv={null}/>
+                  </Link>
+                </div>
+              ))}
+            </div></ScrollArea>
+          </div>
+
+          <h3>Мои кошельки</h3>
+
+          <div className="flex overflow-x-auto w-full" style={{maxWidth:'93vw'}}>
+          <ScrollArea size="1" scrollbars="horizontal" >
+            <div className="flex flex-nowrap">
+            {wallets?.length==0 && <Link href="/banks" className="">
+                <Button variant="outline"><Wallet className="mr-2 h-4 w-4" /> Выбрать банк и создать кошелек</Button>
+            </Link>}
+
+              {wallets?.map(({id,address,blockchain,cvv, bank, currency, balance}) => (
+                <Link key={id} className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mr-6 mb-4"
+                  href={`/wallets/${id}`}>
+                  <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
+                    {truncateString(address, 10, 8)}
+                  </h3>
+                  <div className="flex flex-col grow gap-4 justify-between">
+                    <p className="text-sm opacity-70">{blockchain}</p>
+                    <div className="flex justify-between items-center">
+                      {balance} {currency}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            </ScrollArea>
+          </div>
 
           <h3>Банки системы</h3>
 
@@ -148,45 +198,7 @@ export default async function Index() {
             </ScrollArea>
           </div>
 
-          <h3>Мои кошельки</h3>
-
-          <div className="flex overflow-x-auto w-full" style={{maxWidth:'93vw'}}>
-          <ScrollArea size="1" scrollbars="horizontal" >
-            <div className="flex flex-nowrap">
-              {wallets?.map(({id,address,blockchain,cvv, bank, currency, balance}) => (
-                <Link key={id} className="relative flex flex-col group rounded-lg border p-6 hover:border-foreground mr-6 mb-4"
-                  href={`/wallets/${id}`}>
-                  <h3 className="font-bold mb-2  min-h-[40px] lg:min-h-[60px]">
-                    {truncateString(address, 10, 8)}
-                  </h3>
-                  <div className="flex flex-col grow gap-4 justify-between">
-                    <p className="text-sm opacity-70">{blockchain}</p>
-                    <div className="flex justify-between items-center">
-                      {balance} {currency}
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            </ScrollArea>
-          </div>
-
           
-
-          <h3>Мои карты</h3>
-
-          <div className="flex overflow-x-auto w-full" style={{maxWidth:'93vw'}}>
-          <ScrollArea size="1" scrollbars="horizontal">
-            <div className="flex flex-nowrap">
-              {cards?.map(({id,number,cardholder,cvv, bank, currency, balance, bank_logo, style}) => (
-                <div id={id} className='mr-6 mb-4'>
-                  <Link href={`/cards/${id}`}>
-                    <BankCard id={id} number={number} cardholder={cardholder} balance={balance} currency={currency} bank_logo={bank_logo} card_style={style} name={null} expire_date={null} cvv={null}/>
-                  </Link>
-                </div>
-              ))}
-            </div></ScrollArea>
-          </div>
 
         </>}
 

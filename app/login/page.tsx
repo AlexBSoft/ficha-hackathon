@@ -26,11 +26,12 @@ export default function Login() {
               required
             />
             <label className="text-md" htmlFor="password">
-              Password
+              Пароль
             </label>
             <input
               className="rounded-md px-4 py-2 bg-inherit border mb-6"
               type="password"
+              minLength={6}
               name="password"
               placeholder="••••••••"
               required

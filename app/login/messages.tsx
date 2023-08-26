@@ -10,7 +10,7 @@ export default function Messages() {
     <>
       {error && (
         <p className="mt-4 p-4 bg-neutral-900 text-neutral-300 text-center">
-          {error}
+          {error == 'Could not authenticate user' ? 'Неверные логин или пароль' : error}
         </p>
       )}
       {message && (
